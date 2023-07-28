@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Does the following:
+#   Create a file /var/run/myscript.pid containing the script PID.
+#   Displays "To infinity and beyond" indefinitely
+#   Displays "I hate the kill command" upon receiving a SIGTERM
+#   Displays "Y U no love me?!" upon receiving a SIGINT
+#   Deletes the file /var/run/myscript.pid and terminates upon
+#+  receiving a SIGQUIT or SIGTERM.
+
+# shellcheck disable=SC2009
+echo "$$" > /var/run/myscript.pid
+trap "echo 'I hate the kill command'" SIGTERM
+trap "echo 'Y U no love me?!'" SIGINT
+trap "rm -f /var/run/myscript.pid; exit" SIGQUIT SIGTERM
+
+while true
+do
+    echo "To infinity and beyond"
+    sleep 2
+done
+
+kill "$(pgrep -f 100-process_and_pid_file)"
