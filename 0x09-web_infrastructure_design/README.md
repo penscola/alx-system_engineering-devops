@@ -42,7 +42,15 @@
 <li>3 monitoring clients (data collector for Sumologic or other monitoring services) </li>
 </ul>
 
+3. Scale Up
+------------------------------
+<p>application server and web server working together:</p>
+<ul>
+<li>1 server</li>
+<li>1 load-balancer (HAproxy) configured as cluster with the other one</li>
+<li>Split components (web server, application server, database) with their own server</li>
+</ul>
 
 ====================================================================================
 # AUTHORS
-<h4> by: YourDevLebo & <a href="https://github.com/samie-ya"> samie-ya </a> </h4>
+<h4> by: Penscola@Tech & <a href="https://github.com/penscola"> Felix Kiprotich </a> </h4>
