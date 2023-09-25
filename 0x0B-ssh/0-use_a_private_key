@@ -5,4 +5,4 @@
 server=18.204.10.161
 
 # Use SSH with the private key and the user 'ubuntu'
-ssh -i ~/.ssh/school ubuntu@$server
+ssh -i ~/.ssh/id_rsa ubuntu@$server
