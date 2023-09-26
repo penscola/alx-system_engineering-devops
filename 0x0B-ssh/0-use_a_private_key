@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-# Connects to server 18.204.10.161 with key in ~/.ssh/school
+# Connects to server 54.160.73.129	 with key in ~/.ssh/school
 
-# Define the server hostname or IP address
-server=18.204.10.161
-
-# Use SSH with the private key and the user 'ubuntu'
-ssh -i ~/.ssh/id_rsa ubuntu@$server
+ssh -i ~/.ssh/id_rsa ubuntu@54.160.73.129	
