@@ -1,35 +1,25 @@
 #!/usr/bin/env bash
-# Displays informtation about subdomains.
+# shows information about subdomain 
 
-# uncomment for debugging purposes.
-#set -x
+domain_info() {
+    # funtion that show information about a particular subdomain
 
-# for the checker to work please remove the colors.
+    domain="$1"
+    subdomain="$2"
+    hostname="$subdomain.$domain"
+    record=$(dig "$hostname" | grep -A1 'ANSWER SECTION:' | tail -1 | awk '{print $4}')
+    ip=$(dig "$hostname" | grep -A1 'ANSWER SECTION:' | tail -1 | awk '{print $5}')
 
-# colors
-blue='\e[1;34m'
-brown='\e[0;33m'
-reset='\033[0m'
-
-# variables & parameters
-subdomains=( "www" "lb-01" "web-01" "web-02" )
-domain="$1"
-sub="$2"
-
-dig_cmd () {
-	# func variables
-	sub="$2"
-	INFO="$(dig "$sub.$domain" | grep -A1 'ANSWER SECTION:' | awk 'NR==2')"
-	IP=$(echo "$INFO" | awk '{print $5}')
-	RECORD=$(echo "$INFO" | awk '{print $4}')
-
-	echo -e "${brown}The subdomain ${blue}$sub${brown} is a ${blue}$RECORD${brown} record and points to ${blue}$IP${reset}"
+    echo "The subdomain $subdomain is a $record record and points to $ip"
 }
 
 if [ $# -eq 1 ]; then
-	for subs in "${subdomains[@]}"; do
-		dig_cmd "$domain" "$subs"
-	done
+    subdomains=( "www" "lb-01" "web-01" "web-02" )
+    for sub in "${subdomains[@]}"; do
+        domain_info "$1" "$sub"
+    done
+
 elif [ $# -eq 2 ]; then
-	dig_cmd "$domain" "$sub"
+    domain_info "$1" "$2"
+
 fi
