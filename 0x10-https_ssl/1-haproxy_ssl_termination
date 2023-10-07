@@ -50,6 +50,6 @@ frontend 33743-lb-01
 backend web-backend
 	balance roundrobin
 	option forwardfor
-	server 33743-web-01 3.95.133.255:80 check
-	server 33743-web-02 54.87.207.29:80 check
+	server 33743-web-01 54.160.73.129:80 check
+	server 33743-web-02 18.208.120.56:80 check
  
